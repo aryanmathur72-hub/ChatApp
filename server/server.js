@@ -3,6 +3,7 @@ import express from "express";
 import { connectDB } from "./DB/db.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { errorMiddleware } from "./middlewares/error.middleware.js";
 
 connectDB();
 
@@ -24,8 +25,12 @@ app.use("/api/v1/user", userRoute);
 app.use("/api/v1/message", messageRoute);
 
 // middlwares
-import { errorMiddleware } from "./middlewares/error.middleware.js";
+
 app.use(errorMiddleware);
+
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 server.listen(PORT, () => {
   console.log(`your server listening at port ${PORT}`);
