@@ -22,7 +22,7 @@ export const loginUserThunk = createAsyncThunk(
 );
 
 export const registerUserThunk = createAsyncThunk(
-  "user/signup",
+  "user/register",
   async ({ fullName, username, password, gender }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post("/user/register", {
