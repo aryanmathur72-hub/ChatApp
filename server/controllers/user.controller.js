@@ -33,7 +33,7 @@ export const register = asyncHandler(async (req, res, next) => {
     avatar,
   });
 
-console.log("register",newUser);
+// console.log("register",newUser);
 
   const tokenData = {
     _id: newUser?._id,
