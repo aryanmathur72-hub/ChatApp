@@ -11,7 +11,11 @@ export const register = asyncHandler(async (req, res, next) => {
     return next(new errorHandler("All fields are required", 400));
   }
 
-  const user = await User.findOne({ username });
+  // const user = await User.findOne({ username });
+  const normalizedUsername = username.toLowerCase();
+  const user = await User.findOne({ username: normalizedUsername });
+
+
   if (user) {
     return next(new errorHandler("User already exists", 400));
   }
@@ -35,6 +39,7 @@ export const register = asyncHandler(async (req, res, next) => {
 
   const tokenData = {
     _id: newUser?._id,
+    username: newUser.username,
   };
 
   const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
