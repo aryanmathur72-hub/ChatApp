@@ -29,7 +29,9 @@ export const registerUserThunk = createAsyncThunk(
         fullName,
         username,
         password,
-        gender,
+        gender
+      },{
+        withCredentials: true
       });
       console.log("registerUserThunk",response)
       toast.success("Account created successfully!!");
