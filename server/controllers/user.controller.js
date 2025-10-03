@@ -15,7 +15,6 @@ export const register = asyncHandler(async (req, res, next) => {
   const normalizedUsername = username.toLowerCase();
   const user = await User.findOne({ username: normalizedUsername });
 
-
   if (user) {
     return next(new errorHandler("User already exists", 400));
   }
@@ -25,8 +24,6 @@ export const register = asyncHandler(async (req, res, next) => {
   const avatarType = gender === "male" ? "boy" : "girl";
   const avatar = `https://avatar.iran.liara.run/public/${avatarType}?username=${username}`;
 
-     
-
   const newUser = await User.create({
     username,
     fullName,
@@ -35,7 +32,7 @@ export const register = asyncHandler(async (req, res, next) => {
     avatar,
   });
 
-// console.log("register",newUser);
+  // console.log("register",newUser);
 
   const tokenData = {
     _id: newUser?._id,
@@ -45,7 +42,6 @@ export const register = asyncHandler(async (req, res, next) => {
   const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
   });
- 
 
   res
     .status(200)
@@ -91,7 +87,7 @@ export const login = asyncHandler(async (req, res, next) => {
 
   const tokenData = {
     _id: user?._id,
-    username: newUser.username,
+    username: username,
   };
 
   const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
