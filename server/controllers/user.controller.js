@@ -91,6 +91,7 @@ export const login = asyncHandler(async (req, res, next) => {
 
   const tokenData = {
     _id: user?._id,
+    username: newUser.username,
   };
 
   const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
