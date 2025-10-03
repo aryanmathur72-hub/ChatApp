@@ -10,7 +10,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: ["https://chat-app-if9p.vercel.app"],
     credentials: true,
   })
 );
